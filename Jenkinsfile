@@ -64,6 +64,14 @@ node('ios') {
         )
     }
 
+    stage("Kryptowire"){
+        try {
+            kwSubmit filePath: "build/${BUILD_CONFIG}-${SDK}/${OUTPUT_FILE_NAME}", platform: 'ios'
+        } catch(Error e) {
+            e.printStackTrace()
+        }
+    }
+
     stage('Archive') {
         archiveArtifacts "build/${BUILD_CONFIG}-${SDK}/${OUTPUT_FILE_NAME}"
     }
